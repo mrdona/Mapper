@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Dona
- * Date: 12/09/2016
- * Time: 13:50
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 //using System.Drawing;
@@ -53,15 +45,26 @@ namespace Mapper
 			public string Name {get;set;}
 			public int XRow {get;set;}
 			public int ZRow {get;set;}
-			public TagCompound MBT {get;set;}
+			public TagCompound NBT {get;set;}
 			public System.Drawing.Bitmap BITMAP {get;set;}
 		}
-		
-		#endregion
-		
-		#region Properties
-		
-		private double currentMapSize = 128;
+
+        #endregion
+
+        #region WAYPOINT class
+
+        private class WAYPOINT
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+            public string Name { get; set; }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private double currentMapSize = 128;
 		/// <summary>
 		/// côté d'un carré de map affiché 
 		/// </summary>
@@ -165,9 +168,7 @@ namespace Mapper
 			
 			GenerateMapColors();
 			
-			Load();
-
-            
+			Load();         
 		}
 		
         /// <summary>
@@ -223,7 +224,7 @@ namespace Mapper
 							var bitmap = GetMapBitmap(tagColors);
 							
                             //ajout a la liste des cartes
-							Maps.Add(new MAP(){Name = filename, XRow = xrow, ZRow = zrow, MBT = root, BITMAP = bitmap});
+							Maps.Add(new MAP(){Name = filename, XRow = xrow, ZRow = zrow, NBT = root, BITMAP = bitmap});
 													
 						}
 					}
@@ -463,8 +464,8 @@ namespace Mapper
 
                 var ratio = mapSize / pixelSize;
 
-                var mXCenter = ((TagInt)map.MBT.getNode(@"\data\xCenter")).number;
-                var mZCenter = ((TagInt)map.MBT.getNode(@"\data\zCenter")).number;
+                var mXCenter = ((TagInt)map.NBT.getNode(@"\data\xCenter")).number;
+                var mZCenter = ((TagInt)map.NBT.getNode(@"\data\zCenter")).number;
 
                 var xCenter = Math.Floor((double)mXCenter / ratio);
                 var zCenter = Math.Floor((double)mZCenter / ratio);
