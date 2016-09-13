@@ -166,6 +166,8 @@ namespace Mapper
 			GenerateMapColors();
 			
 			Load();
+
+            
 		}
 		
         /// <summary>
