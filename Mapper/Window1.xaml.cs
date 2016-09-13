@@ -55,7 +55,7 @@ namespace Mapper
         private class WAYPOINT
         {
             public int X { get; set; }
-            public int Y { get; set; }
+            public int Z { get; set; }
             public string Name { get; set; }
         }
 
@@ -64,6 +64,7 @@ namespace Mapper
         #region Properties
 
         private double currentMapSize = 128;
+
 		/// <summary>
 		/// côté d'un carré de map affiché 
 		/// </summary>
@@ -292,6 +293,10 @@ namespace Mapper
                            this.UpdateLayout();
 					}));					
 				}
+
+                listBox.ItemsSource = Maps;
+                listBox.DisplayMemberPath = "Name";
+                
 			}
 			catch(Exception ex)
 			{
@@ -472,9 +477,7 @@ namespace Mapper
                 var approxX = Math.Floor((xmap + xCenter) * ratio);
                 var approxZ = Math.Floor((zmap + zCenter) * ratio);
 
-                currentPos = new Point(approxX, approxZ);
-
-                lblPos.Content = String.Format("Curseur X:{0} - Z:{1}", pos.X, pos.Y);
+                lblPos.Content = String.Format("Curseur X:{0} - Z:{1}", Math.Round(approxX), Math.Round(approxZ));
             }
             catch (Exception ex)
             {
